@@ -1,0 +1,264 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Lexify - Watch Movies & TV Shows Online</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}body{font-family:'Helvetica Neue',Arial,sans-serif;background:#141414;color:#fff;overflow-x:hidden}nav{position:fixed;top:0;width:100%;padding:20px 50px;background:linear-gradient(180deg,rgba(0,0,0,.7) 10%,transparent);z-index:1000;transition:all .3s}nav.hidden{transform:translateY(-100%)}nav.scrolled{background-color:#141414}.nav-content{display:flex;justify-content:space-between;align-items:center}.nav-left{display:flex;align-items:center;gap:30px}.logo{font-size:32px;font-weight:900;color:#e50914;letter-spacing:-1px}.nav-menu{display:flex;gap:25px;list-style:none}.nav-menu a{color:#e5e5e5;text-decoration:none;font-size:14px;transition:color .3s}.nav-menu a:hover{color:#b3b3b3}.nav-right{display:flex;align-items:center;gap:25px}.search-icon,.notifications,.profile{font-size:20px;cursor:pointer;transition:opacity .3s}.search-icon:hover,.notifications:hover,.profile:hover{opacity:.7}.notifications{position:relative}.notification-badge{position:absolute;top:-5px;right:-5px;background:#e50914;color:#fff;border-radius:50%;width:18px;height:18px;font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;animation:pulse 2s infinite}@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.1)}}.profile{width:32px;height:32px;background:#e50914;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700}.hero{position:relative;height:80vh;background:url('hero.png') center/cover;display:flex;align-items:center;padding:0 50px;margin-bottom:20px;overflow:hidden;transition:background-image 1s}.hero-bg{position:absolute;inset:0;background:linear-gradient(77deg,rgba(0,0,0,.6) 0%,transparent 85%);z-index:1}.hero-content{position:relative;z-index:2;max-width:500px;transition:opacity .5s}.hero-content.fade-out{opacity:0}.hero-title{font-size:48px;font-weight:700;margin-bottom:15px;animation:slideIn .8s ease-out}.hero-description{font-size:18px;line-height:1.4;margin-bottom:30px;animation:slideIn 1s ease-out}.hero-buttons{display:flex;gap:15px;animation:slideIn 1.2s ease-out}@keyframes slideIn{from{opacity:0;transform:translateX(-50px)}to{opacity:1;transform:translateX(0)}}.btn{padding:12px 30px;font-size:16px;font-weight:600;border:none;border-radius:4px;cursor:pointer;display:flex;align-items:center;gap:10px;transition:all .3s}.btn-play{background:#fff;color:#000}.btn-play:hover{background:rgba(255,255,255,.75)}.btn-info{background:rgba(109,109,110,.7);color:#fff}.btn-info:hover{background:rgba(109,109,110,.4)}.btn-upload{background:#e50914;color:#fff}.btn-upload:hover{background:#b20710}.row-container{padding:0 50px 40px;position:relative}.row-title{font-size:20px;font-weight:600;margin-bottom:15px;color:#e5e5e5}.row-scroll-container{position:relative}.row-scroll-btn{position:absolute;top:50%;transform:translateY(-50%);width:50px;height:141px;background:rgba(0,0,0,.8);border:none;color:#fff;font-size:24px;cursor:pointer;z-index:10;opacity:0;transition:opacity .3s}.row-scroll-container:hover .row-scroll-btn{opacity:1}.row-scroll-btn:hover{background:rgba(0,0,0,.95)}.row-scroll-btn.left{left:0}.row-scroll-btn.right{right:0}.movie-row{display:flex;gap:5px;overflow-x:auto;scroll-behavior:smooth;padding-bottom:10px}.movie-row::-webkit-scrollbar{height:0}.movie-card{min-width:250px;height:141px;border-radius:4px;cursor:pointer;transition:all .3s;position:relative;overflow:hidden;user-select:none;-webkit-user-select:none;-webkit-touch-callout:none}.movie-card img{width:100%;height:100%;object-fit:cover;transition:transform .3s}.movie-card:hover{transform:scale(1.08) translateY(-5px);z-index:10;box-shadow:0 8px 24px rgba(0,0,0,.6)}.movie-card:hover img{transform:scale(1.1)}.movie-card-overlay{position:absolute;bottom:0;left:0;right:0;background:linear-gradient(to top,rgba(0,0,0,.9),transparent);padding:10px;opacity:0;transition:opacity .3s}.movie-card:hover .movie-card-overlay{opacity:1}.movie-card-title{font-size:14px;font-weight:600;margin-bottom:3px}.movie-card-meta{font-size:11px;color:#b3b3b3}.movie-card-badge{position:absolute;top:8px;right:8px;background:#e50914;color:#fff;font-size:10px;font-weight:700;padding:4px 8px;border-radius:3px;text-transform:uppercase}.movie-card-new{animation:pulseNew 2s infinite}@keyframes pulseNew{0%,100%{transform:scale(1)}50%{transform:scale(1.05)}}.movie-card-genre{position:absolute;top:8px;left:8px;background:rgba(0,0,0,.7);color:#fff;font-size:10px;padding:4px 8px;border-radius:3px}.movie-card-progress{position:absolute;bottom:0;left:0;height:3px;background:#e50914}.custom-context-menu{display:none;position:fixed;background:#1a1a1a;border-radius:8px;padding:8px 0;box-shadow:0 4px 20px rgba(0,0,0,.8);z-index:3000;min-width:200px;border:1px solid #333}.custom-context-menu.active{display:block}.context-menu-item{padding:12px 20px;cursor:pointer;font-size:14px;color:#e5e5e5;display:flex;align-items:center;gap:12px;transition:background .2s}.context-menu-item:hover{background:#333}.context-menu-item span:first-child{font-size:18px}.modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.9);z-index:2000;overflow-y:auto}.modal.active{display:flex;justify-content:center;align-items:flex-start;padding:50px 0}.modal-content{background:#181818;border-radius:8px;max-width:850px;width:90%;position:relative;animation:slideUp .4s ease-out}@keyframes slideUp{from{opacity:0;transform:translateY(100px)}to{opacity:1;transform:translateY(0)}}.modal-close{position:absolute;top:15px;right:15px;width:36px;height:36px;background:#181818;border:none;border-radius:50%;color:#fff;font-size:24px;cursor:pointer;z-index:10;display:flex;align-items:center;justify-content:center;transition:background .3s}.modal-close:hover{background:#282828}.modal-hero{position:relative;height:480px}.modal-hero img{width:100%;height:100%;object-fit:cover}.modal-hero-gradient{position:absolute;bottom:0;left:0;right:0;height:150px;background:linear-gradient(to top,#181818,transparent)}.dashboard-logo{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:72px;font-weight:900;color:#e50914;letter-spacing:-2px;text-shadow:0 4px 20px rgba(229,9,20,.5)}.modal-hero-content{position:absolute;bottom:40px;left:40px;right:40px}.modal-title{font-size:36px;font-weight:700;margin-bottom:20px}.modal-info{padding:0 40px 40px}.modal-meta{display:flex;gap:20px;align-items:center;margin-bottom:20px;font-size:16px}.match{color:#46d369;font-weight:700}.rating{border:1px solid rgba(255,255,255,.4);padding:0 6px;font-size:13px}.modal-description{font-size:16px;line-height:1.6;color:#e5e5e5;margin-bottom:30px}.modal-details{display:flex;gap:40px;font-size:14px;line-height:2}.detail-label{color:#777}.detail-value{color:#e5e5e5}.dashboard-content{text-align:center}.dashboard-tagline{font-size:18px;color:#b3b3b3;margin-bottom:30px}.form-group{margin-bottom:20px}.form-group label{display:block;margin-bottom:8px;font-size:14px;font-weight:600;color:#e5e5e5}.form-group input,.form-group textarea{width:100%;padding:12px;background:#2a2a2a;border:1px solid #404040;border-radius:4px;color:#fff;font-size:14px;font-family:inherit;transition:border-color .3s}.form-group input:focus,.form-group textarea:focus{outline:none;border-color:#e50914}.form-group textarea{min-height:100px;resize:vertical}.genre-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}.genre-tag{padding:6px 12px;background:#2a2a2a;border:1px solid #404040;border-radius:16px;font-size:13px;cursor:pointer;transition:all .3s}.genre-tag:hover{border-color:#606060}.genre-tag.selected{background:#e50914;border-color:#e50914}.form-actions{display:flex;gap:10px;justify-content:flex-end;margin-top:30px;padding-top:20px;border-top:1px solid #404040}.btn-cancel{background:transparent;border:1px solid #808080;color:#e5e5e5}.btn-cancel:hover{background:rgba(255,255,255,.1)}.btn-submit{background:#e50914;color:#fff}.btn-submit:hover{background:#b20710}.upload-success{text-align:center;padding:40px 20px}.success-icon{font-size:64px;margin-bottom:20px}.notification-panel{max-height:600px;overflow-y:auto}.notification-item{display:flex;gap:15px;padding:15px;background:#2a2a2a;border-radius:8px;margin-bottom:10px;cursor:pointer;transition:background .3s}.notification-item:hover{background:#333}.notification-item.unread,.notification-item.suggestion{border-left:3px solid #e50914}.notification-thumb{width:100px;height:56px;border-radius:4px;object-fit:cover;flex-shrink:0}.notification-content{flex:1}.notification-title{font-weight:600;margin-bottom:5px;font-size:14px}.notification-text{font-size:13px;color:#b3b3b3;margin-bottom:5px}.notification-time{font-size:12px;color:#808080}.notification-new-badge{display:inline-block;background:#e50914;color:#fff;font-size:11px;padding:2px 8px;border-radius:3px;margin-left:10px;font-weight:600}.no-notifications{text-align:center;padding:60px 20px;color:#808080}.search-input{width:100%;padding:15px 20px;background:#2a2a2a;border:2px solid #404040;border-radius:8px;color:#fff;font-size:16px;margin-bottom:20px}.search-input:focus{outline:none;border-color:#e50914}.search-results{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:15px;max-height:500px;overflow-y:auto}.search-result-card{cursor:pointer;border-radius:4px;overflow:hidden;transition:transform .3s}.search-result-card:hover{transform:scale(1.05)}.search-result-card img{width:100%;height:120px;object-fit:cover}.search-result-info{padding:10px;background:#2a2a2a}.search-result-title{font-size:14px;font-weight:600;margin-bottom:5px}.search-result-meta{font-size:12px;color:#b3b3b3}.no-results{text-align:center;padding:40px;color:#808080}.video-player{display:none;position:fixed;inset:0;background:#000;z-index:5000}.video-player.active{display:block}.player-close{position:absolute;top:20px;left:20px;z-index:10;font-size:22px;background:rgba(0,0,0,.7);color:#fff;border:none;padding:10px 20px;cursor:pointer;border-radius:4px}.player-content{width:100%;height:100%}.player-content iframe{width:100vw;height:100vh;border:none}@media(max-width:768px){nav,.row-container,.hero{padding-left:20px;padding-right:20px}.nav-menu{display:none}.hero{height:60vh}.hero-title{font-size:32px}.movie-card{min-width:150px;height:85px}.modal-hero{height:300px}.modal-title{font-size:28px}.modal-info{padding:0 20px 20px}}
+</style>
+</head>
+<body>
+<nav id="navbar">
+<div class="nav-content">
+<div class="nav-left">
+<div class="logo">LEXIFY</div>
+<ul class="nav-menu">
+<li><a href="#home">Home</a></li>
+<li><a href="#series">Series</a></li>
+<li><a href="#films">Films</a></li>
+<li><a href="#new">New & Popular</a></li>
+<li><a href="#list">My List</a></li>
+</ul>
+</div>
+<div class="nav-right">
+<div class="search-icon" onclick="openSearch()">🔍</div>
+<div class="notifications" onclick="openNotifications()">🔔<span class="notification-badge" id="notificationBadge" style="display:none">0</span></div>
+<div class="profile" onclick="openDashboard()">L</div>
+</div>
+</div>
+</nav>
+<div class="hero" id="home">
+<div class="hero-bg"></div>
+<div class="hero-content" id="heroContent">
+<h1 class="hero-title" id="heroTitle">Sometimes Love Isn't Enough</h1>
+<p class="hero-description" id="heroDescription">A poignant exploration of love, loss, and the difficult choices we make when we realize that loving someone doesn't always mean staying together.</p>
+<div class="hero-buttons">
+<button class="btn btn-play" id="heroPlayBtn" onclick="openPlayer('https://www.youtube.com/embed/oWY9Vy4CmUI',true)"><span>▶</span><span>Play Trailer</span></button>
+<button class="btn btn-info" id="heroInfoBtn" onclick="openModal('Sometimes Love Isn\\'t Enough','A poignant exploration of love, loss, and the difficult choices we make when we realize that loving someone doesn\\'t always mean staying together.','2024','15m','Drama, Romance','https://www.youtube.com/embed/424iauAYGWQ','hero.png')"><span>ⓘ</span><span>More Info</span></button>
+</div>
+</div>
+</div>
+<div id="rows"></div>
+<div class="modal" id="movieModal">
+<div class="modal-content">
+<button class="modal-close" onclick="closeModal()">×</button>
+<div class="modal-hero">
+<img id="modalImage" src="" alt="">
+<div class="modal-hero-gradient"></div>
+<div class="modal-hero-content" id="modalHeroContent">
+<h2 class="modal-title" id="modalTitle"></h2>
+<div class="hero-buttons"><button class="btn btn-play" onclick="openPlayerFromModal()"><span>▶</span><span>Play</span></button></div>
+</div>
+</div>
+<div class="modal-info">
+<div class="modal-meta" id="modalMeta">
+<span class="match" id="modalMatch">98% Match</span>
+<span id="modalYear"></span>
+<span class="rating">16+</span>
+<span id="modalDuration"></span>
+</div>
+<p class="modal-description" id="modalDescription"></p>
+<div class="modal-details" id="modalDetails">
+<div><span class="detail-label">Cast:</span> <span class="detail-value">Emma Stone, Ryan Gosling</span></div>
+<div><span class="detail-label">Genres:</span> <span class="detail-value" id="modalGenres"></span></div>
+<div><span class="detail-label">Director:</span> <span class="detail-value">Christopher Nolan</span></div>
+</div>
+</div>
+</div>
+</div>
+<div class="video-player" id="videoPlayer">
+<button class="player-close" onclick="closePlayer()">← Back</button>
+<div class="player-content" id="playerContent"></div>
+</div>
+<div class="modal" id="uploadModal">
+<div class="modal-content">
+<button class="modal-close" onclick="closeUploadModal()">×</button>
+<div class="modal-info" style="padding:40px">
+<h2 style="font-size:32px;margin-bottom:10px">Upload Your Short Film</h2>
+<p style="color:#b3b3b3;margin-bottom:30px">Share your story with the Lexify community</p>
+<div id="uploadFormContainer">
+<form id="uploadForm" onsubmit="submitFilm(event)">
+<div class="form-group"><label>Film Title *</label><input type="text" id="filmTitle" placeholder="Enter your film title" required></div>
+<div class="form-group"><label>Description *</label><textarea id="filmDescription" placeholder="Tell us about your film..." required></textarea></div>
+<div class="form-group"><label>Duration *</label><input type="text" id="filmDuration" placeholder="e.g., 15m or 2h 30m" required></div>
+<div class="form-group"><label>Release Year *</label><input type="text" id="filmYear" placeholder="e.g., 2024" required></div>
+<div class="form-group">
+<label>Genres * (Select all that apply)</label>
+<div class="genre-tags">
+<div class="genre-tag" onclick="toggleGenre(this,'Drama')">Drama</div>
+<div class="genre-tag" onclick="toggleGenre(this,'Romance')">Romance</div>
+<div class="genre-tag" onclick="toggleGenre(this,'Action')">Action</div>
+<div class="genre-tag" onclick="toggleGenre(this,'Thriller')">Thriller</div>
+<div class="genre-tag" onclick="toggleGenre(this,'Sci-Fi')">Sci-Fi</div>
+<div class="genre-tag" onclick="toggleGenre(this,'Comedy')">Comedy</div>
+<div class="genre-tag" onclick="toggleGenre(this,'Documentary')">Documentary</div>
+<div class="genre-tag" onclick="toggleGenre(this,'Horror')">Horror</div>
+</div>
+<input type="hidden" id="selectedGenres" required>
+</div>
+<div class="form-group"><label>Trailer Link (YouTube or Vimeo) *</label><input type="url" id="trailerLink" placeholder="https://www.youtube.com/watch?v=..." required></div>
+<div class="form-group"><label>Full Film Link (YouTube or Vimeo) *</label><input type="url" id="filmLink" placeholder="https://www.youtube.com/watch?v=..." required></div>
+<div class="form-group"><label>Poster/Thumbnail URL *</label><input type="url" id="posterUrl" placeholder="https://example.com/poster.jpg" required></div>
+<div class="form-group"><label>Awards & Festivals (Optional)</label><input type="text" id="awards" placeholder="e.g., Sundance Official Selection 2024"></div>
+<div class="form-actions">
+<button type="button" class="btn btn-cancel" onclick="closeUploadModal()">Cancel</button>
+<button type="submit" class="btn btn-submit">Upload Film</button>
+</div>
+</form>
+</div>
+</div>
+</div>
+</div>
+<div class="modal" id="searchModal">
+<div class="modal-content">
+<button class="modal-close" onclick="closeSearch()">×</button>
+<div class="modal-info" style="padding:40px">
+<h2 style="font-size:32px;margin-bottom:20px">Search</h2>
+<input type="text" class="search-input" id="searchInput" placeholder="Search for films, genres, or keywords..." oninput="performSearch()">
+<div class="search-results" id="searchResults"></div>
+</div>
+</div>
+</div>
+<div class="modal" id="notificationsModal">
+<div class="modal-content">
+<button class="modal-close" onclick="closeNotifications()">×</button>
+<div class="modal-info" style="padding:40px">
+<h2 style="font-size:32px;margin-bottom:20px">For You</h2>
+<div class="notification-panel" id="notificationPanel"></div>
+</div>
+</div>
+</div>
+<div class="custom-context-menu" id="customContextMenu">
+<div class="context-menu-item" onclick="viewPoster()"><span>🖼️</span><span>View Movie Poster</span></div>
+<div class="context-menu-item" onclick="playTrailer()"><span>▶️</span><span>Play Trailer</span></div>
+<div class="context-menu-item" onclick="playMovie()"><span>🎬</span><span>Play Movie</span></div>
+<div class="context-menu-item" onclick="showMoreInfo()"><span>ⓘ</span><span>More Info</span></div>
+</div>
+<div class="modal" id="posterModal">
+<div class="modal-content">
+<button class="modal-close" onclick="closePosterModal()">×</button>
+<div class="modal-hero">
+<img id="posterFullImage" src="" alt="" style="object-fit:contain">
+</div>
+</div>
+</div>
+<script>
+const videoLinks=['https://www.youtube.com/embed/424iauAYGWQ','https://www.youtube.com/embed/oWY9Vy4CmUI'];
+const categories=["Short Films","Trending Now","Popular on Lexify","Action Thrillers","Romantic Stories","Sci-Fi Adventures","Documentaries","Award-Winning Films"];
+let currentVideoUrl=null,currentMovieTitle='',touchStartY=0,lastTap=0,returnToModal=false;
+let selectedGenres=[],uploadedFilms=[],allMovies=[],notifications=[],unreadNotifications=0;
+let userPreferences={favoriteGenres:['Drama','Romance','Thriller'],watchHistory:[],continueWatching:{}};
+let heroRotationIndex=0,heroRotationInterval=null,heroFeaturedFilms=[];
+let contextMenuMovie=null,longPressTimer=null;
+allMovies.push({title:'Sometimes Love Isn\'t Enough',description:'A poignant exploration of love, loss, and the difficult choices we make when we realize that loving someone doesn\'t always mean staying together.',year:'2024',duration:'15m',genres:'Drama, Romance',trailerUrl:'https://www.youtube.com/embed/oWY9Vy4CmUI',fullUrl:'https://www.youtube.com/embed/424iauAYGWQ',posterUrl:'hero.png',uploadDate:new Date()});
+categories.forEach((cat,i)=>{
+const container=document.createElement('div');
+container.className='row-container';
+container.innerHTML=`<h2 class="row-title">${cat}</h2><div class="row-scroll-container"><button class="row-scroll-btn left" onclick="scrollRow(this,-1)">‹</button><div class="movie-row"></div><button class="row-scroll-btn right" onclick="scrollRow(this,1)">›</button></div>`;
+const row=container.querySelector('.movie-row');
+if(cat==='Short Films'){
+const firstMovie={title:'Sometimes Love Isn\'t Enough',posterUrl:'hero.png',year:'2024',duration:'15m',genres:'Drama, Romance',description:'A poignant exploration of love, loss, and the difficult choices we make when we realize that loving someone doesn\'t always mean staying together.',trailerUrl:'https://www.youtube.com/embed/oWY9Vy4CmUI',fullUrl:'https://www.youtube.com/embed/424iauAYGWQ',uploadDate:new Date(),isNew:false};
+row.appendChild(createMovieCard(firstMovie));
+const realMovies=[
+{title:'Badlands',posterUrl:'badlands.jpg',year:'2025',duration:'18m',genres:'Drama, Western',description:'A gripping tale of survival and redemption in the unforgiving American frontier, where one man must confront his past to forge a new future.'},
+{title:'Zootopia 2',posterUrl:'zootopia.jpg',year:'2025',duration:'22m',genres:'Animation, Adventure',description:'Judy and Nick return for another thrilling adventure in the mammal metropolis, uncovering a conspiracy that threatens the harmony of Zootopia.'},
+{title:'Tron Ares',posterUrl:'tron.jpg',year:'2025',duration:'25m',genres:'Sci-Fi, Action',description:'A highly sophisticated program emerges from the digital world into ours, bringing the next evolution of the Tron universe to life.'},
+{title:'Stranger Things',posterUrl:'stranger.jpg',year:'2025',duration:'28m',genres:'Horror, Mystery',description:'Dark secrets resurface in Hawkins as the gang faces their most terrifying challenge yet in the Upside Down.'},
+{title:'The Pitt',posterUrl:'pitt.jpg',year:'2025',duration:'20m',genres:'Drama, Medical',description:'A raw and intense look at the challenges facing modern emergency room healthcare workers over the course of a single shift.'},
+{title:'His & Hers',posterUrl:'his.jpg',year:'2025',duration:'16m',genres:'Romance, Drama',description:'Two perspectives, one story. A relationship explored from both sides, revealing the beautiful complexity of love and understanding.'},
+{title:'Fallcut',posterUrl:'fallcut.jpg',year:'2025',duration:'19m',genres:'Thriller, Mystery',description:'When a film editor discovers hidden footage in an old reel, she uncovers a sinister secret that blurs the line between fiction and reality.'}
+];
+realMovies.forEach(movie=>{
+const videoUrl=videoLinks[Math.floor(Math.random()*videoLinks.length)];
+const fullMovie={...movie,trailerUrl:videoUrl,fullUrl:videoUrl,uploadDate:new Date(Date.now()-Math.random()*5*24*60*60*1000),isNew:Math.random()>.5};
+allMovies.push(fullMovie);
+row.appendChild(createMovieCard(fullMovie));
+});
+}
+for(let x=0;x<8;x++){
+const img=`https://picsum.photos/250/141?random=${i*10+x}`;
+const videoUrl=videoLinks[(i+x)%2];
+const title=`${cat} ${x+1}`;
+const desc='A gripping tale that will keep you on the edge of your seat from start to finish.';
+const genres=i%3===0?'Drama, Thriller':i%3===1?'Action, Sci-Fi':'Romance, Comedy';
+const movie={title,description:desc,year:'2024',duration:'2h 15m',genres,trailerUrl:videoUrl,fullUrl:videoUrl,posterUrl:img,uploadDate:new Date(Date.now()-Math.random()*30*24*60*60*1000)};
+allMovies.push(movie);
+row.appendChild(createMovieCard(movie));
+}
+document.getElementById('rows').appendChild(container);
+});
+function addRandomSuggestions(){
+const texts=["Based on your Drama preferences, you might love this","Trending now in your favorite genres","Highly rated by viewers like you"];
+for(let i=0;i<3;i++){
+const rm=allMovies[Math.floor(Math.random()*Math.min(allMovies.length,10))];
+notifications.push({id:Date.now()+i,title:rm.title,text:texts[i],time:'Recommended',read:true,film:rm,timestamp:new Date(),isSuggestion:true});
+}
+}
+function createMovieCard(movie){
+const card=document.createElement('div');
+card.className='movie-card';
+const isNew=movie.isNew||(new Date()-new Date(movie.uploadDate))<7*24*60*60*1000;
+const genreLabel=movie.genres.split(',')[0].trim();
+const progress=userPreferences.continueWatching[movie.title]||0;
+card.innerHTML=`<img src="${movie.posterUrl}" alt="${movie.title}">${isNew?'<div class="movie-card-badge movie-card-new">NEW</div>':''}<div class="movie-card-genre">${genreLabel}</div>${progress>0?`<div class="movie-card-progress" style="width:${progress}%"></div>`:''}<div class="movie-card-overlay"><div class="movie-card-title">${movie.title}</div><div class="movie-card-meta">${movie.year} • ${movie.duration}</div></div>`;
+card.onclick=()=>{updateHeroSection(movie.title,movie.description,movie.year,movie.duration,movie.genres,movie.trailerUrl,movie.fullUrl,movie.posterUrl);openModal(movie.title,movie.description,movie.year,movie.duration,movie.genres,movie.fullUrl,movie.posterUrl);};
+card.addEventListener('contextmenu',e=>{e.preventDefault();openCustomContextMenu(e,movie);});
+card.addEventListener('touchstart',e=>{longPressTimer=setTimeout(()=>{openCustomContextMenu(e.touches[0],movie);navigator.vibrate&&navigator.vibrate(50);},500);});
+card.addEventListener('touchend',()=>{clearTimeout(longPressTimer);});
+card.addEventListener('touchmove',()=>{clearTimeout(longPressTimer);});
+return card;
+}
+function scrollRow(btn,dir){btn.parentElement.querySelector('.movie-row').scrollBy({left:dir*800,behavior:'smooth'});}
+addRandomSuggestions();
+heroFeaturedFilms=[allMovies[0],...allMovies.filter((m,i)=>i>0&&(m.genres.includes('Drama')||m.genres.includes('Romance'))).slice(0,4)];
+function initHeroRotation(){heroRotationInterval=setInterval(rotateHero,10000);}
+function rotateHero(){heroRotationIndex=(heroRotationIndex+1)%heroFeaturedFilms.length;const f=heroFeaturedFilms[heroRotationIndex];updateHeroSection(f.title,f.description,f.year,f.duration,f.genres,f.trailerUrl,f.fullUrl,f.posterUrl);}
+initHeroRotation();
+function openModal(t,d,y,dur,g,v,img){pauseHeroRotation();currentMovieTitle=t;currentVideoUrl=v;document.getElementById('modalTitle').textContent=t;document.getElementById('modalDescription').textContent=d;document.getElementById('modalYear').textContent=y;document.getElementById('modalDuration').textContent=dur;document.getElementById('modalGenres').textContent=g;document.getElementById('modalImage').src=img;document.getElementById('modalMatch').textContent=`${calculateMatchPercentage(g)}% Match`;document.getElementById('modalHeroContent').style.display='block';document.getElementById('modalMeta').style.display='flex';document.getElementById('modalDetails').style.display='flex';const logo=document.querySelector('.dashboard-logo');if(logo)logo.remove();document.getElementById('movieModal').classList.add('active');document.body.style.overflow='hidden';if(!userPreferences.watchHistory.includes(t)){userPreferences.watchHistory.push(t);updateUserPreferencesFromGenres(g);}}
+function calculateMatchPercentage(g){if(!g)return 75;const mg=g.split(',').map(x=>x.trim());let m=0;mg.forEach(genre=>{if(userPreferences.favoriteGenres.includes(genre))m++;});return Math.min(99,70+(m*10));}
+function updateUserPreferencesFromGenres(g){const mg=g.split(',').map(x=>x.trim());mg.forEach(genre=>{if(!userPreferences.favoriteGenres.includes(genre)){const c=userPreferences.watchHistory.filter(title=>{const mv=allMovies.find(m=>m.title===title);return mv&&mv.genres.includes(genre);}).length;if(c>=2)userPreferences.favoriteGenres.push(genre);}});}
+function openDashboard(){pauseHeroRotation();document.getElementById('modalHeroContent').style.display='none';document.getElementById('modalMeta').style.display='none';document.getElementById('modalDetails').style.display='none';document.getElementById('modalTitle').textContent='Welcome to Lexify';document.getElementById('modalDescription').innerHTML='<div class="dashboard-content"><p class="dashboard-tagline">Your premier destination for independent short films and creative storytelling.</p><p style="margin-bottom:30px">Lexify is a platform dedicated to showcasing powerful short-form content from emerging filmmakers around the world.</p><button class="btn btn-upload" onclick="handleUpload()"><span>📤</span><span>Upload Your Short Film</span></button></div>';const mh=document.querySelector('.modal-hero');if(!mh.querySelector('.dashboard-logo')){const logo=document.createElement('div');logo.className='dashboard-logo';logo.textContent='LEXIFY';mh.appendChild(logo);}document.getElementById('modalImage').src='https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?w=850&h=480&fit=crop';currentMovieTitle='';currentVideoUrl=null;document.getElementById('movieModal').classList.add('active');document.body.style.overflow='hidden';}
+function updateHeroSection(t,d,y,dur,g,tr,fu,p){const hc=document.getElementById('heroContent');hc.classList.add('fade-out');setTimeout(()=>{document.getElementById('home').style.backgroundImage=`url('${p}')`;document.getElementById('heroTitle').textContent=t;document.getElementById('heroDescription').textContent=d;document.getElementById('heroPlayBtn').onclick=()=>{pauseHeroRotation();openPlayer(tr,true);};document.getElementById('heroInfoBtn').onclick=()=>{pauseHeroRotation();openModal(t,d,y,dur,g,fu,p);};hc.classList.remove('fade-out');},500);}
+function pauseHeroRotation(){clearInterval(heroRotationInterval);}
+function resumeHeroRotation(){clearInterval(heroRotationInterval);heroRotationInterval=setInterval(rotateHero,10000);}
+function handleUpload(){closeModal();setTimeout(()=>{document.getElementById('uploadModal').classList.add('active');document.body.style.overflow='hidden';},300);}
+function closeModal(){const logo=document.querySelector('.dashboard-logo');if(logo)logo.remove();document.getElementById('movieModal').classList.remove('active');document.body.style.overflow='auto';resumeHeroRotation();}
+function openPlayerFromModal(){returnToModal=true;closeModal();setTimeout(()=>openPlayer(currentVideoUrl),300);}
+function openPlayer(url,fromHero=false){returnToModal=fromHero?false:returnToModal||false;const iframeId=url.split('/embed/')[1].split('?')[0];document.getElementById('playerContent').innerHTML=`<iframe id="videoIframe" src="https://www.youtube.com/embed/${iframeId}?autoplay=1&fs=1&controls=1" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>`;document.getElementById('videoPlayer').classList.add('active');document.getElementById('navbar').classList.add('hidden');document.body.style.overflow='hidden';setTimeout(()=>{const iframe=document.getElementById('videoIframe');const fs=iframe.requestFullscreen||iframe.webkitRequestFullscreen;if(fs)fs.call(iframe).catch(()=>{});if(screen.orientation?.lock)screen.orientation.lock('landscape').catch(()=>{});},400);}
+function closePlayer(){const shouldReturn=returnToModal;document.getElementById('videoPlayer').classList.remove('active');document.getElementById('playerContent').innerHTML='';document.getElementById('navbar').classList.remove('hidden');document.body.style.overflow='auto';if(document.fullscreenElement)document.exitFullscreen().catch(()=>{});if(screen.orientation?.unlock)screen.orientation.unlock();if(shouldReturn&&currentMovieTitle&&currentVideoUrl){setTimeout(()=>{document.getElementById('movieModal').classList.add('active');document.body.style.overflow='hidden';},300);}else{resumeHeroRotation();}returnToModal=false;if(currentMovieTitle){userPreferences.continueWatching[currentMovieTitle]=Math.floor(Math.random()*70)+10;}}
+document.addEventListener('touchend',e=>{const now=Date.now();if(now-lastTap<300)closePlayer();lastTap=now;});
+document.addEventListener('touchstart',e=>{touchStartY=e.touches[0].clientY;});
+document.addEventListener('touchmove',e=>{if(e.touches[0].clientY-touchStartY>120)closePlayer();});
+document.addEventListener('fullscreenchange',()=>{if(!document.fullscreenElement){document.getElementById('navbar').classList.remove('hidden');if(document.getElementById('videoPlayer').classList.contains('active'))closePlayer();}});
+window.addEventListener('scroll',()=>{document.getElementById('navbar').classList.toggle('scrolled',window.scrollY>100);});
+document.getElementById('movieModal').addEventListener('click',e=>{if(e.target.id==='movieModal')closeModal();});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeModal();closePlayer();closeUploadModal();closeSearch();closeNotifications();closeCustomContextMenu();}});
+function openCustomContextMenu(e,movie){e.preventDefault();contextMenuMovie=movie;const menu=document.getElementById('customContextMenu');const x=e.clientX||e.pageX;const y=e.clientY||e.pageY;menu.style.left=x+'px';menu.style.top=y+'px';menu.classList.add('active');}
+function closeCustomContextMenu(){document.getElementById('customContextMenu').classList.remove('active');contextMenuMovie=null;}
+document.addEventListener('click',e=>{if(!e.target.closest('.custom-context-menu')&&!e.target.closest('.movie-card')){closeCustomContextMenu();}});
+function viewPoster(){if(!contextMenuMovie)return;document.getElementById('posterFullImage').src=contextMenuMovie.posterUrl;document.getElementById('posterModal').classList.add('active');document.body.style.overflow='hidden';closeCustomContextMenu();}
+function closePosterModal(){document.getElementById('posterModal').classList.remove('active');document.body.style.overflow='auto';}
+function playTrailer(){if(!contextMenuMovie)return;openPlayer(contextMenuMovie.trailerUrl,true);closeCustomContextMenu();}
+function playMovie(){if(!contextMenuMovie)return;openPlayer(contextMenuMovie.fullUrl,false);closeCustomContextMenu();}
+function showMoreInfo(){if(!contextMenuMovie)return;updateHeroSection(contextMenuMovie.title,contextMenuMovie.description,contextMenuMovie.year,contextMenuMovie.duration,contextMenuMovie.genres,contextMenuMovie.trailerUrl,contextMenuMovie.fullUrl,contextMenuMovie.posterUrl);openModal(contextMenuMovie.title,contextMenuMovie.description,contextMenuMovie.year,contextMenuMovie.duration,contextMenuMovie.genres,contextMenuMovie.fullUrl,contextMenuMovie.posterUrl);closeCustomContextMenu();}
+function addNotification(t,txt,fd){notifications.unshift({id:Date.now(),title:t,text:txt,time:'Just now',read:false,film:fd,timestamp:new Date(),isSuggestion:false});unreadNotifications++;updateNotificationBadge();}
+function updateNotificationBadge(){const badge=document.getElementById('notificationBadge');badge.textContent=unreadNotifications;badge.style.display=unreadNotifications>0?'flex':'none';}
+function openNotifications(){const panel=document.getElementById('notificationPanel');if(notifications.length===0){panel.innerHTML='<div class="no-notifications"><div style="font-size:48px;margin-bottom:15px;opacity:.5">🔔</div><p>No notifications yet</p></div>';}else{panel.innerHTML=notifications.map(n=>{const cls=n.read?'':'unread';const suggestionCls=n.isSuggestion?' suggestion':'';const badge=n.read?'':`<span class="notification-new-badge">NEW</span>`;return `<div class="notification-item ${cls}${suggestionCls}" onclick='viewNotification(${n.id})'><img src="${n.film.posterUrl}" class="notification-thumb"><div class="notification-content"><div class="notification-title">${n.title}${badge}</div><div class="notification-text">${n.text}</div><div class="notification-time">${n.time}</div></div></div>`;}).join('');}document.getElementById('notificationsModal').classList.add('active');document.body.style.overflow='hidden';setTimeout(()=>{notifications.forEach(n=>n.read=true);unreadNotifications=0;updateNotificationBadge();},1000);}
+function closeNotifications(){document.getElementById('notificationsModal').classList.remove('active');document.body.style.overflow='auto';}
+function viewNotification(nId){const n=notifications.find(nt=>nt.id===nId);if(!n)return;closeNotifications();const f=n.film;updateHeroSection(f.title,f.description,f.year,f.duration,f.genres,f.trailerUrl,f.fullUrl,f.posterUrl);setTimeout(()=>openModal(f.title,f.description,f.year,f.duration,f.genres,f.fullUrl,f.posterUrl),300);}
+function openSearch(){document.getElementById('searchModal').classList.add('active');document.body.style.overflow='hidden';document.getElementById('searchInput').focus();}
+function closeSearch(){document.getElementById('searchModal').classList.remove('active');document.body.style.overflow='auto';document.getElementById('searchInput').value='';document.getElementById('searchResults').innerHTML='';}
+function performSearch(){const query=document.getElementById('searchInput').value.toLowerCase().trim();const results=document.getElementById('searchResults');if(!query){results.innerHTML='';return;}const filtered=allMovies.filter(m=>m.title.toLowerCase().includes(query)||m.description.toLowerCase().includes(query)||m.genres.toLowerCase().includes(query)||m.year.includes(query));if(filtered.length===0){results.innerHTML='<div class="no-results">No films found matching your search.</div>';return;}results.innerHTML=filtered.map(m=>`<div class="search-result-card" onclick='selectSearchResult(${JSON.stringify(m).replace(/'/g,"&#39;")})'><img src="${m.posterUrl}"><div class="search-result-info"><div class="search-result-title">${m.title}</div><div class="search-result-meta">${m.year} • ${m.duration} • ${m.genres}</div></div></div>`).join('');}
+function selectSearchResult(m){closeSearch();updateHeroSection(m.title,m.description,m.year,m.duration,m.genres,m.trailerUrl,m.fullUrl,m.posterUrl);window.scrollTo({top:0,behavior:'smooth'});setTimeout(()=>openModal(m.title,m.description,m.year,m.duration,m.genres,m.fullUrl,m.posterUrl),500);}
+function toggleGenre(el,genre){el.classList.toggle('selected');if(selectedGenres.includes(genre)){selectedGenres=selectedGenres.filter(g=>g!==genre);}else{selectedGenres.push(genre);}document.getElementById('selectedGenres').value=selectedGenres.join(', ');}
+function closeUploadModal(){document.getElementById('uploadModal').classList.remove('active');document.body.style.overflow='auto';document.getElementById('uploadForm').reset();selectedGenres=[];document.querySelectorAll('.genre-tag').forEach(tag=>tag.classList.remove('selected'));}
+function convertToEmbedUrl(url){if(url.includes('youtube.com/watch')){const id=url.split('v=')[1]?.split('&')[0];return `https://www.youtube.com/embed/${id}`;}if(url.includes('youtu.be/')){const id=url.split('youtu.be/')[1]?.split('?')[0];return `https://www.youtube.com/embed/${id}`;}if(url.includes('vimeo.com/')){const id=url.split('vimeo.com/')[1]?.split('?')[0];return `https://player.vimeo.com/video/${id}`;}return url;}
+function submitFilm(e){e.preventDefault();const film={title:document.getElementById('filmTitle').value,description:document.getElementById('filmDescription').value,duration:document.getElementById('filmDuration').value,year:document.getElementById('filmYear').value,genres:selectedGenres.join(', '),trailerUrl:convertToEmbedUrl(document.getElementById('trailerLink').value),fullUrl:convertToEmbedUrl(document.getElementById('filmLink').value),posterUrl:document.getElementById('posterUrl').value,awards:document.getElementById('awards').value,uploadDate:new Date(),isNew:true};if(selectedGenres.length===0){alert('Please select at least one genre');return;}uploadedFilms.push(film);allMovies.push(film);addFilmToCategories(film);showUploadSuccess(film.title);}
+function addFilmToCategories(film){const dur=film.duration.toLowerCase();const gen=film.genres.toLowerCase();const hasAwards=film.awards&&film.awards.trim()!=='';if(dur.includes('m')&&!dur.includes('h')&&parseInt(dur)<=30)addFilmToRow('Short Films',film);if(gen.includes('action')||gen.includes('thriller'))addFilmToRow('Action Thrillers',film);if(gen.includes('romance')||gen.includes('comedy'))addFilmToRow('Romantic Stories',film);if(gen.includes('sci-fi'))addFilmToRow('Sci-Fi Adventures',film);if(gen.includes('documentary'))addFilmToRow('Documentaries',film);addFilmToRow('Trending Now',film);if(hasAwards)addFilmToRow('Award-Winning Films',film);addFilmToRow('Popular on Lexify',film);}
+function addFilmToRow(catName,film){const containers=document.querySelectorAll('.row-container');let targetRow=null;containers.forEach(c=>{const t=c.querySelector('.row-title');if(t&&t.textContent===catName)targetRow=c.querySelector('.movie-row');});if(!targetRow)return;const card=createMovieCard(film);targetRow.insertBefore(card,targetRow.firstChild);}
+function showUploadSuccess(title){const container=document.getElementById('uploadFormContainer');const filmData=uploadedFilms[uploadedFilms.length-1];container.innerHTML=`<div class="upload-success"><div class="success-icon">✓</div><h3>Film Uploaded Successfully!</h3><p>"${title}" has been added to Lexify and is now live.</p><button class="btn btn-play" onclick="closeUploadModal()">Browse Platform</button></div>`;addNotification('New Film Added',`"${title}" is now available to watch`,filmData);setTimeout(()=>{closeUploadModal();setTimeout(()=>location.reload(),500);},3000);}
+</script>
+</body>
+</html>
