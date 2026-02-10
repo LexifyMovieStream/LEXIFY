@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lexify Logo - Google Play Store</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: #1a1a1a;
+            font-family: Arial, sans-serif;
+        }
+        
+        #logoCanvas {
+            border: 2px solid #333;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+        }
+        
+        .controls {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #2a2a2a;
+            padding: 20px;
+            border-radius: 10px;
+            color: white;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            max-width: 250px;
+        }
+        
+        h3 {
+            margin-top: 0;
+            color: #ff0000;
+        }
+        
+        button {
+            background: #ff0000;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: bold;
+            margin-top: 10px;
+            width: 100%;
+            transition: background 0.3s;
+        }
+        
+        button:hover {
+            background: #cc0000;
+        }
+        
+        .info {
+            font-size: 12px;
+            color: #aaa;
+            margin: 10px 0;
+            line-height: 1.5;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="logoCanvas" width="512" height="512"></canvas>
+    
+    <div class="controls">
+        <h3>LEXIFY Logo</h3>
+        <div class="info">
+            <strong>Size:</strong> 512x512px<br>
+            <strong>Format:</strong> PNG<br>
+            <strong>Background:</strong> Black<br>
+            <strong>Text:</strong> Red (#FF0000)
+        </div>
+        <button onclick="downloadLogo(512)">Download 512x512</button>
+        <button onclick="downloadLogo(1024)">Download 1024x1024</button>
+    </div>
+
+    <script>
+        function drawLogo(size) {
+            const canvas = document.createElement('canvas');
+            canvas.width = size;
+            canvas.height = size;
+            const ctx = canvas.getContext('2d');
+            
+            // Black background
+            ctx.fillStyle = '#000000';
+            ctx.fillRect(0, 0, size, size);
+            
+            // Red text with Netflix-style font
+            ctx.fillStyle = '#FF0000';
+            
+            // Use a bold, condensed font similar to streaming services
+            const fontSize = size * 0.18; // Responsive font size
+            ctx.font = `bold ${fontSize}px 'Arial Black', 'Arial', sans-serif`;
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            ctx.letterSpacing = '2px';
+            
+            // Draw LEXIFY centered
+            ctx.fillText('LEXIFY', size / 2, size / 2);
+            
+            return canvas;
+        }
+        
+        function updatePreview() {
+            const canvas = document.getElementById('logoCanvas');
+            const ctx = canvas.getContext('2d');
+            
+            // Clear and redraw
+            ctx.fillStyle = '#000000';
+            ctx.fillRect(0, 0, 512, 512);
+            
+            ctx.fillStyle = '#FF0000';
+            ctx.font = 'bold 92px "Arial Black", Arial, sans-serif';
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            
+            ctx.fillText('LEXIFY', 256, 256);
+        }
+        
+        function downloadLogo(size) {
+            const canvas = drawLogo(size);
+            const link = document.createElement('a');
+            link.download = `lexify-logo-${size}x${size}.png`;
+            link.href = canvas.toDataURL('image/png');
+            link.click();
+        }
+        
+        // Draw initial preview
+        updatePreview();
+    </script>
+</body>
