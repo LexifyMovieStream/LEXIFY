@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lexify App Icon - Cinema Seats</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: #1a1a1a;
+            font-family: Arial, sans-serif;
+        }
+        
+        .container {
+            display: flex;
+            gap: 30px;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: flex-start;
+        }
+        
+        .preview {
+            text-align: center;
+        }
+        
+        #logoCanvas {
+            border: 2px solid #333;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+            border-radius: 20%;
+        }
+        
+        .controls {
+            background: #2a2a2a;
+            padding: 20px;
+            border-radius: 10px;
+            color: white;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            max-width: 300px;
+        }
+        
+        h3 {
+            margin-top: 0;
+            color: #ff0000;
+        }
+        
+        button {
+            background: #ff0000;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: bold;
+            margin-top: 10px;
+            width: 100%;
+            transition: background 0.3s;
+        }
+        
+        button:hover {
+            background: #cc0000;
+        }
+        
+        .info {
+            font-size: 12px;
+            color: #aaa;
+            margin: 10px 0;
+            line-height: 1.5;
+        }
+        
+        .size-label {
+            color: #999;
+            font-size: 11px;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="preview">
+            <canvas id="logoCanvas" width="512" height="512"></canvas>
+            <div class="size-label">Preview (512x512)</div>
+        </div>
+        
+        <div class="controls">
+            <h3>LEXIFY App Icon</h3>
+            <div class="info">
+                <strong>Cinema Seats Design</strong><br>
+                High-quality PNG files<br>
+                Ready for Google Play Store
+            </div>
+            
+            <button onclick="downloadLogo(192)">📱 Download 192x192</button>
+            <div class="size-label">MDPI - Low density</div>
+            
+            <button onclick="downloadLogo(512)">📱 Download 512x512</button>
+            <div class="size-label">Standard app icon (recommended)</div>
+            
+            <button onclick="downloadLogo(1024)">📱 Download 1024x1024</button>
+            <div class="size-label">High-res feature graphic</div>
+            
+            <button onclick="downloadLogo(2048)">📱 Download 2048x2048</button>
+            <div class="size-label">Ultra HD / Future-proof</div>
+            
+            <hr style="border-color: #444; margin: 20px 0;">
+            
+            <button onclick="downloadAllSizes()">📦 Download All Sizes (ZIP)</button>
+            <div class="size-label">Get all icon sizes at once</div>
+        </div>
+    </div>
+
+    <script>
+        function drawSeat(ctx, x, y, width, height, color) {
+            // Seat back
+            ctx.fillStyle = color;
+            ctx.fillRect(x, y, width, height * 0.6);
+            
+            // Seat cushion
+            ctx.fillRect(x, y + height * 0.6, width, height * 0.4);
+            
+            // Add some shading for depth
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.3)';
+            ctx.fillRect(x, y + height * 0.55, width, height * 0.05);
+            
+            // Armrests
+            ctx.fillStyle = color;
+            ctx.fillRect(x - width * 0.1, y + height * 0.5, width * 0.1, height * 0.4);
+            ctx.fillRect(x + width, y + height * 0.5, width * 0.1, height * 0.4);
+            
+            // Highlights
+            ctx.fillStyle = 'rgba(255, 255, 255, 0.1)';
+            ctx.fillRect(x + width * 0.1, y + height * 0.05, width * 0.3, height * 0.3);
+        }
+
+        function drawLogo(size) {
+            const canvas = document.createElement('canvas');
+            canvas.width = size;
+            canvas.height = size;
+            const ctx = canvas.getContext('2d');
+            
+            // Black background
+            ctx.fillStyle = '#000000';
+            ctx.fillRect(0, 0, size, size);
+            
+            // Draw cinema aisle (center stairs)
+            const aisleWidth = size * 0.15;
+            const aisleX = (size - aisleWidth) / 2;
+            const aisleY = size * 0.45;
+            const aisleHeight = size * 0.55;
+            
+            // Draw stairs/steps
+            const numSteps = 8;
+            for (let i = 0; i < numSteps; i++) {
+                const stepY = aisleY + (aisleHeight / numSteps) * i;
+                const stepHeight = aisleHeight / numSteps;
+                
+                // Step surface
+                ctx.fillStyle = i % 2 === 0 ? '#1a1a1a' : '#2a2a2a';
+                ctx.fillRect(aisleX, stepY, aisleWidth, stepHeight * 0.3);
+                
+                // Step riser
+                ctx.fillStyle = '#0a0a0a';
+                ctx.fillRect(aisleX, stepY + stepHeight * 0.3, aisleWidth, stepHeight * 0.7);
+            }
+            
+            // Draw cinema seats
+            const seatColor = '#8B2532'; // Dark red cinema seats
+            const seatWidth = size * 0.045;
+            const seatHeight = size * 0.06;
+            const seatSpacing = size * 0.052;
+            
+            // Left side seats
+            const leftStartX = size * 0.05;
+            const rows = 4;
+            const seatsPerRow = 6;
+            
+            for (let row = 0; row < rows; row++) {
+                const rowY = size * 0.5 + (row * seatHeight * 1.8);
+                for (let seat = 0; seat < seatsPerRow; seat++) {
+                    const seatX = leftStartX + (seat * seatSpacing);
+                    drawSeat(ctx, seatX, rowY, seatWidth, seatHeight, seatColor);
+                }
+            }
+            
+            // Right side seats
+            const rightStartX = size * 0.58;
+            for (let row = 0; row < rows; row++) {
+                const rowY = size * 0.5 + (row * seatHeight * 1.8);
+                for (let seat = 0; seat < seatsPerRow; seat++) {
+                    const seatX = rightStartX + (seat * seatSpacing);
+                    drawSeat(ctx, seatX, rowY, seatWidth, seatHeight, seatColor);
+                }
+            }
+            
+            // Add perspective effect with gradient overlay
+            const gradient = ctx.createLinearGradient(0, size * 0.4, 0, size);
+            gradient.addColorStop(0, 'rgba(0, 0, 0, 0)');
+            gradient.addColorStop(1, 'rgba(0, 0, 0, 0.4)');
+            ctx.fillStyle = gradient;
+            ctx.fillRect(0, size * 0.4, size, size * 0.6);
+            
+            // Draw LEXIFY text
+            ctx.fillStyle = '#FF0000';
+            const fontSize = size * 0.16;
+            ctx.font = `bold ${fontSize}px 'Arial Black', Arial, sans-serif`;
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            
+            // Add text shadow for depth
+            ctx.shadowColor = 'rgba(0, 0, 0, 0.8)';
+            ctx.shadowBlur = size * 0.02;
+            ctx.shadowOffsetX = 0;
+            ctx.shadowOffsetY = size * 0.01;
+            
+            ctx.fillText('LEXIFY', size / 2, size * 0.25);
+            
+            // Reset shadow
+            ctx.shadowColor = 'transparent';
+            ctx.shadowBlur = 0;
+            
+            return canvas;
+        }
+        
+        function updatePreview() {
+            const displayCanvas = document.getElementById('logoCanvas');
+            const tempCanvas = drawLogo(512);
+            const ctx = displayCanvas.getContext('2d');
+            ctx.drawImage(tempCanvas, 0, 0);
+        }
+        
+        function downloadLogo(size) {
+            const canvas = drawLogo(size);
+            const link = document.createElement('a');
+            link.download = `lexify-app-icon-${size}x${size}.png`;
+            link.href = canvas.toDataURL('image/png');
+            link.click();
+        }
+        
+        function downloadAllSizes() {
+            const sizes = [192, 512, 1024, 2048];
+            sizes.forEach((size, index) => {
+                setTimeout(() => {
+                    downloadLogo(size);
+                }, index * 500); // Stagger downloads
+            });
+        }
+        
+        // Draw initial preview
+        updatePreview();
+    </script>
+</body>
+</html>
